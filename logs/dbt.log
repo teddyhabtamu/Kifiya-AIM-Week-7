@@ -1,0 +1,48 @@
+[0m20:36:33.895047 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x70fa47609180>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x70fa4849a170>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x70fa4849a110>]}
+
+
+============================== 20:36:33.898508 | c81fe842-5501-4494-bf35-73cced5ca47c ==============================
+[0m20:36:33.898508 [info ] [MainThread]: Running with dbt=1.9.2
+[0m20:36:33.899480 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'fail_fast': 'False', 'profiles_dir': '/home/teddy/.dbt', 'log_path': 'logs', 'version_check': 'True', 'debug': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'empty': 'None', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'static_parser': 'True', 'introspect': 'True', 'invocation_command': 'dbt init my_project', 'target_path': 'None', 'log_format': 'default', 'send_anonymous_usage_stats': 'True'}
+[0m20:36:33.909207 [warn ] [MainThread]: [ConfigFolderDirectory]: Unable to parse logging event dictionary. Failed to parse dir field: expected string or bytes-like object.. Dictionary: {'dir': PosixPath('/home/teddy/.dbt')}
+[0m20:36:33.910004 [info ] [MainThread]: Creating dbt configuration folder at 
+[0m20:36:33.994682 [debug] [MainThread]: Starter project path: /home/teddy/Desktop/Kifya journey/Kifiya-AIM-Week-7/.venv/lib/python3.10/site-packages/dbt/include/starter_project
+[0m20:36:34.006014 [info ] [MainThread]: 
+Your new dbt project "my_project" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m20:36:34.009574 [info ] [MainThread]: Setting up your profile.
+[0m20:38:49.653543 [info ] [MainThread]: Profile my_project written to /home/teddy/.dbt/profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+[0m20:38:49.659763 [debug] [MainThread]: Resource report: {"command_name": "init", "command_success": true, "command_wall_clock_time": 135.83853, "process_in_blocks": "984", "process_kernel_time": 0.144901, "process_mem_max_rss": "91128", "process_out_blocks": "80", "process_user_time": 1.687857}
+[0m20:38:49.663959 [debug] [MainThread]: Command `dbt init` succeeded at 20:38:49.663103 after 135.84 seconds
+[0m20:38:49.667613 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x70fa47609180>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x70fa45f29ea0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x70fa4849b1f0>]}
+[0m20:38:49.671368 [debug] [MainThread]: Flushing usage events
+[0m20:38:52.374529 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m20:39:08.923095 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x77706ae0d120>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x77706bc4e230>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x77706bc4e1a0>]}
+
+
+============================== 20:39:08.926763 | cde85400-59d4-4847-b221-ae8fb4f0947f ==============================
+[0m20:39:08.926763 [info ] [MainThread]: Running with dbt=1.9.2
+[0m20:39:08.927764 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'fail_fast': 'False', 'profiles_dir': '/home/teddy/.dbt', 'log_path': 'logs', 'version_check': 'True', 'debug': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'empty': 'False', 'quiet': 'False', 'no_print': 'None', 'log_format': 'default', 'static_parser': 'True', 'invocation_command': 'dbt run', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'target_path': 'None', 'introspect': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m20:39:08.928680 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path /home/teddy/Desktop/Kifya journey/Kifiya-AIM-Week-7/dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m20:39:08.930196 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": false, "command_wall_clock_time": 0.08033137, "process_in_blocks": "120", "process_kernel_time": 0.130073, "process_mem_max_rss": "86104", "process_out_blocks": "16", "process_user_time": 1.552879}
+[0m20:39:08.931002 [debug] [MainThread]: Command `dbt run` failed at 20:39:08.930850 after 0.08 seconds
+[0m20:39:08.931683 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x77706ae0d120>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x77706bc4e8f0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x77706bc4e230>]}
+[0m20:39:08.932409 [debug] [MainThread]: Flushing usage events
+[0m20:39:10.395661 [debug] [MainThread]: An error was encountered while trying to flush usage events
