@@ -1,218 +1,148 @@
-# Kifiya-AIM-Week-7
+# **Ethiopian Medical Businesses Data Warehouse**
 
-## Project Overview
+![GitHub](https://img.shields.io/badge/License-MIT-blue) ![GitHub](https://img.shields.io/badge/Python-3.8%2B-green) ![GitHub](https://img.shields.io/badge/DBT-1.0%2B-orange) ![GitHub](https://img.shields.io/badge/YOLOv5-ultralytics-red)
 
-This project involves building a data warehouse to store data on Ethiopian medical businesses scraped from the web and Telegram channels. The project includes several key steps to ensure the data warehouse is robust, scalable, and capable of handling the unique challenges associated with scraping and data collection from Telegram channels. Additionally, it integrates object detection capabilities using YOLO (You Only Look Once) to enhance data analysis.
+This project is designed to build a **data warehouse** for Ethiopian medical businesses by scraping data from Telegram channels, cleaning and transforming the data, performing object detection using YOLO, and exposing the data via a **FastAPI** application. The goal is to provide actionable insights and enable data-driven decision-making for stakeholders.
 
-## Features
+---
 
-- **Data Scraping and Collection Pipeline**: Extract data from public Telegram channels relevant to Ethiopian medical businesses.
-- **Data Cleaning and Transformation**: Clean and transform the scraped data to ensure it is ready for analysis.
-- **Object Detection using YOLO**: Enhance data analysis with object detection capabilities.
-- **Data Warehouse Design and Implementation**: Store and manage the cleaned and transformed data.
-- **Data Integration and Enrichment**: Integrate and enrich the data for comprehensive analysis.
+## **Table of Contents**
+1. [Project Overview](#project-overview)
+2. [Features](#features)
+3. [Installation](#installation)
+4. [Usage](#usage)
+5. [Project Structure](#project-structure)
+6. [Technologies Used](#technologies-used)
+7. [Contributing](#contributing)
+8. [License](#license)
+9. [Acknowledgements](#acknowledgements)
 
-## Setup Instructions
+---
 
-### Prerequisites
+## **Project Overview**
+The project involves the following key tasks:
+1. **Data Scraping and Collection**: Scraping data from Telegram channels like `DoctorsET`, `Chemed`, and `lobelia4cosmetics` using the **Telethon** library.
+2. **Data Cleaning and Transformation**: Cleaning and transforming the scraped data using **DBT (Data Build Tool)**.
+3. **Object Detection**: Detecting objects in images from Telegram channels using **YOLOv5**.
+4. **Data Warehouse Design**: Storing the processed data in a **PostgreSQL** database.
+5. **API Exposure**: Exposing the data via a **FastAPI** application for easy access and querying.
 
-- Python 3.6+
-- pip
-- SQLite (or any other database of your choice)
-- DBT (Data Build Tool)
+---
 
-### Installation
+## **Features**
+- **Telegram Scraping**: Extract data from public Telegram channels using the Telethon library.
+- **Data Cleaning**: Remove duplicates, handle missing values, and standardize data formats using DBT.
+- **Object Detection**: Detect objects in images using YOLOv5 and store the results in a database.
+- **Data Warehouse**: Store cleaned and transformed data in a PostgreSQL database.
+- **FastAPI Integration**: Expose the data via a RESTful API for easy access and querying.
 
+---
+
+## **Installation**
+Follow these steps to set up the project locally.
+
+### **Prerequisites**
+- Python 3.8+
+- PostgreSQL
+- Git
+
+### **Steps**
 1. Clone the repository:
+   ```bash
+   git clone https://github.com/teddyhabtamu/Kifiya-AIM-Week-7.git
+   cd Kifiya-AIM-Week-7
+   ```
 
-    ```bash
-    git clone https://github.com/yourusername/Kifiya-AIM-Week-7.git
-    cd Kifiya-AIM-Week-7
-    ```
+2. Set up a virtual environment and install dependencies:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
 
-2. Install the required Python packages:
+3. Set up the PostgreSQL database:
+   - Create a database named `medical_data`.
+   - Update the database connection details in `database.py`.
 
-    ```bash
-    pip install telethon pandas sqlite3 dbt
-    ```
+4. Install DBT and initialize the project:
+   ```bash
+   pip install dbt
+   dbt init my_project
+   ```
 
-### Data Scraping and Collection
+5. Set up YOLOv5:
+   ```bash
+   git clone https://github.com/ultralytics/yolov5.git
+   cd yolov5
+   pip install -r requirements.txt
+   ```
 
-1. Create a Python script `telegram_scraper.py` to scrape data from Telegram channels:
+---
 
-    ```python
-    import logging
-    from telethon import TelegramClient, events
+## **Usage**
+### **1. Data Scraping**
+Run the Telegram scraping script:
+```bash
+python scripts/telegram_scraper.py
+```
 
-    # Configure logging
-    logging.basicConfig(filename='scraping.log', level=logging.INFO, format='%(asctime)s - %(message)s')
+### **2. Data Cleaning and Transformation**
+Run DBT transformations:
+```bash
+cd my_project
+dbt run
+dbt test
+```
 
-    # Use your own values from my.telegram.org
-    api_id = 'YOUR_API_ID'
-    api_hash = 'YOUR_API_HASH'
+### **3. Object Detection**
+Run YOLOv5 object detection on images:
+```bash
+python yolov5/detect.py --source path/to/images --weights yolov5s.pt --conf 0.25
+```
 
-    # Create the client and connect
-    client = TelegramClient('session_name', api_id, api_hash)
+### **4. FastAPI Application**
+Start the FastAPI server:
+```bash
+uvicorn main:app --reload
+```
+Access the API at `http://localhost:8000`.
 
-    async def main():
-        # List of channels to scrape
-        channels = [
-            'https://t.me/DoctorsET',
-            'https://t.me/lobelia4cosmetics',
-            'https://t.me/yetenaweg',
-            'https://t.me/EAHCI'
-        ]
+---
+---
 
-        data = []
+## **Technologies Used**
+- **Python**: Primary programming language.
+- **Telethon**: For scraping data from Telegram channels.
+- **DBT**: For data transformation and cleaning.
+- **YOLOv5**: For object detection in images.
+- **PostgreSQL**: For data storage.
+- **FastAPI**: For exposing data via a RESTful API.
+- **SQLAlchemy**: For database interactions.
+- **OpenCV**: For image processing.
 
-        for channel in channels:
-            async for message in client.iter_messages(channel):
-                logging.info(f"Message from {channel}: {message.text}")
-                data.append({
-                    'channel': channel,
-                    'message': message.text
-                })
+---
 
-        # Save data to a file
-        with open('scraped_data.json', 'w') as f:
-            json.dump(data, f)
+## **Contributing**
+Contributions are welcome! Please follow these steps:
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/YourFeatureName`).
+3. Commit your changes (`git commit -m 'Add some feature'`).
+4. Push to the branch (`git push origin feature/YourFeatureName`).
+5. Open a pull request.
 
-    with client:
-        client.loop.run_until_complete(main())
-    ```
+---
 
-2. Run the script:
+## **License**
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
 
-    ```bash
-    python telegram_scraper.py
-    ```
+---
 
-### Data Cleaning and Transformation
+## **Acknowledgements**
+- [Telethon](https://docs.telethon.dev/) for Telegram scraping.
+- [DBT](https://www.getdbt.com/) for data transformation.
+- [YOLOv5](https://github.com/ultralytics/yolov5) for object detection.
+- [FastAPI](https://fastapi.tiangolo.com/) for building the API.
 
-1. Create a Python script `data_cleaning.py` for data cleaning:
+---
 
-    ```python
-    import pandas as pd
-    import logging
-
-    # Configure logging
-    logging.basicConfig(filename='cleaning.log', level=logging.INFO, format='%(asctime)s - %(message)s')
-
-    # Load raw data
-    data = pd.read_json('scraped_data.json')
-
-    # Remove duplicates
-    data.drop_duplicates(inplace=True)
-
-    # Handle missing values
-    data.fillna(method='ffill', inplace=True)
-
-    # Standardize formats (example: converting all text to lowercase)
-    data['message'] = data['message'].str.lower()
-
-    # Data validation (example: ensuring no empty messages)
-    data = data[data['message'].str.strip() != '']
-
-    # Save cleaned data
-    data.to_json('cleaned_data.json', orient='records')
-
-    logging.info('Data cleaning completed successfully.')
-    ```
-
-2. Run the script:
-
-    ```bash
-    python data_cleaning.py
-    ```
-
-3. Store the cleaned data in a database:
-
-    ```python
-    import sqlite3
-    import pandas as pd
-
-    # Connect to SQLite database
-    conn = sqlite3.connect('data.db')
-    c = conn.cursor()
-
-    # Create table
-    c.execute('''
-    CREATE TABLE IF NOT EXISTS messages (
-        id INTEGER PRIMARY KEY,
-        channel TEXT,
-        message TEXT
-    )
-    ''')
-
-    # Insert cleaned data
-    data = pd.read_json('cleaned_data.json')
-    data.to_sql('messages', conn, if_exists='replace', index=False)
-
-    conn.commit()
-    conn.close()
-
-    logging.info('Cleaned data stored in database successfully.')
-    ```
-
-### DBT for Data Transformation
-
-1. Install DBT:
-
-    ```bash
-    pip install dbt
-    ```
-
-2. Initialize a DBT project:
-
-    ```bash
-    dbt init my_project
-    ```
-
-3. Define DBT models:
-
-    Create a model file in `my_project/models/transform.sql`.
-
-    ```sql
-    -- filepath: my_project/models/transform.sql
-    WITH cleaned_data AS (
-        SELECT
-            id,
-            channel,
-            message
-        FROM
-            {{ ref('messages') }}
-    )
-    SELECT
-        id,
-        channel,
-        message
-    FROM
-        cleaned_data
-    ```
-
-4. Run DBT models:
-
-    ```bash
-    cd my_project
-    dbt run
-    ```
-
-5. Test and document transformations:
-
-    ```bash
-    dbt test
-    dbt docs generate
-    dbt docs serve
-    ```
-
-### Monitoring and Logging
-
-Ensure logging is implemented in all scripts to track processes and capture errors.
-
-## Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
-
-## License
-
-This project is licensed under the MIT License.
+For any questions or feedback, please open an issue or contact the project maintainer.
